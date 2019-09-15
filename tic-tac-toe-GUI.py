@@ -1,7 +1,7 @@
 from tkinter import *
 from threading import Thread
 from tkinter import messagebox
-import time
+import time, random
 
 class App(Tk):
     def __init__(self):
@@ -60,6 +60,7 @@ class App(Tk):
         self.turn_box = Label(self.output, bg='black', fg='white', anchor='nw', justify=CENTER)
         self.turn_box.place(relx=.1, rely=.0, relwidth=.9, relheight=.1)
 
+
     def onclick(self, args):
         if self.is_won:
             turn = ''
@@ -85,6 +86,7 @@ class App(Tk):
             elif self.btn9['text'] is '' and args == 9: self.btn9['text'] = turn
             self.win_checker_call()
             self.tie_checker()
+            self.computer()
 
     def win_checker_call(self):
         thread1 = Thread(target=self.winner_checker, args=(self.turn_box,))
@@ -138,8 +140,56 @@ class App(Tk):
 
     def tie_checker(self):
         if self.is_won:
-            if ('x', 'o') in self.btn1['text'] != self.btn2['text'] != self.btn3['text'] != self.btn4['text'] != self.btn5['text'] != self.btn6['text'] != self.btn7['text'] != self.btn8['text'] != self.btn9['text'] != self.btn1['text'] != self.btn4['text'] != self.btn7['text'] != self.btn2['text'] != self.btn5['text'] != self.btn8['text'] != self.btn3['text'] != self.btn6['text'] != self.btn9['text'] != self.btn1['text'] != self.btn5['text'] != self.btn9['text'] != self.btn3['text'] != self.btn5['text'] != self.btn7['text'] != '' == True:
-                messagebox.showinfo('Tic-Tac-Toe', 'Tie!')
+            check = [self.btn1['text'], self.btn2['text'], self.btn3['text'], self.btn4['text'], self.btn5['text'], self.btn6['text'], self.btn7['text'], self.btn8['text'], self.btn9['text']]
+            if ('X' in check) and ('O' in check) and ('' not in check): messagebox.showinfo('Tic-Tac-Toe', 'Tie!')
+
+    def computer(self):
+        comp_turn = ''
+        if self.check_box1.get()==1: comp_turn += 'O'
+        elif self.check_box2.get()==1: comp_turn += 'X'
+
+        value = [self.btn1['text'], self.btn2['text'], self.btn3['text'], self.btn4['text'], self.btn5['text'], self.btn6['text'], self.btn7['text'], self.btn8['text'], self.btn9['text']]
+
+        def defender():
+            if (value[0] == value[1] != '') and value[2] == '': self.btn3['text'] = comp_turn
+            elif (value[1] == value[2] != '') and value[0] == '': self.btn1['text'] = comp_turn
+            elif (value[0] == value[2] != '') and value[1] =='': self.btn2['text'] = comp_turn
+
+            elif (value[3] == value[4] != '') and value[5] =='': self.btn6['text'] = comp_turn
+            elif (value[4] == value[5] != '') and value[3] =='': self.btn4['text'] = comp_turn
+            elif (value[3] == value[5] != '') and value[4] == '': self.btn5['text'] = comp_turn
+
+            elif (value[5] == value[7] != '') and value[8] == '': self.btn9['text'] = comp_turn
+            elif (value[7] == value[8] != '') and value[6] == '': self.btn7['text'] = comp_turn
+            elif (value[5] == value[8] != '') and value[7] == '': self.btn8['text'] = comp_turn
+
+            elif (value[0] == value[3] != '') and value[6] == '': self.btn7['text'] = comp_turn
+            elif (value[3] == value[6] != '') and value[0] == '': self.btn1['text'] = comp_turn
+            elif (value[0] == value[6] != '') and value[3] == '': self.btn4['text'] = comp_turn
+
+            elif (value[1] == value[4] != '') and value[7] == '': self.btn8['text'] = comp_turn
+            elif (value[4] == value[7] != '') and value[1] == '': self.btn2['text'] = comp_turn
+            elif (value[1] == value[7] != '') and value[4] == '': self.btn5['text'] = comp_turn
+
+            elif (value[2] == value[5] != '') and value[8] == '': self.btn9['text'] = comp_turn
+            elif (value[5] == value[8] != '') and value[2] == '': self.btn3['text'] = comp_turn
+            elif (value[2] == value[8] != '') and value[5] == '': self.btn6['text'] = comp_turn
+
+            elif (value[0] == value[4] != '') and value[8] == '': self.btn9['text'] = comp_turn
+            elif (value[4] == value[8] != '') and value[0] == '': self.btn1['text'] = comp_turn
+            elif (value[0] == value[8] != '') and value[4] == '': self.btn5['text'] = comp_turn
+
+            elif (value[2] == value[4] != '') and value[6] == '': self.btn7['text'] = comp_turn
+            elif (value[4] == value[6] != '') and value[2] == '': self.btn3['text'] = comp_turn
+            elif (value[2] == value[6] != '') and value[4] == '': self.btn5['text'] = comp_turn
+
+            else:
+                for i in range(1, 10):
+                    print(f'self.btn{i}[\'text\']')
+                # this is the problem ------^
+
+        defender()
+
 
 
 
