@@ -1,4 +1,4 @@
-# tic tac toe with AI-bot and multithread
+# Tic tac toe with AI-bot and multithread
 <hr>
 
 # Game options-
@@ -24,5 +24,5 @@
   check8 = self.btn3['text'] == self.btn5['text'] == self.btn7['text'] != ''
   ```
   
-  # To get to know more check my code.
+  # To get to know more check out my code.
  
