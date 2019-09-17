@@ -23,4 +23,6 @@
   check7 = self.btn1['text'] == self.btn5['text'] == self.btn9['text'] != ''
   check8 = self.btn3['text'] == self.btn5['text'] == self.btn7['text'] != ''
   ```
+  
+  # To get to know more check my code.
  
